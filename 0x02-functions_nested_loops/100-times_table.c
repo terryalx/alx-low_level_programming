@@ -1,45 +1,45 @@
 #include "main.h"
 
 /**
- * print_times_table -> time table
+ * print_times_table - prints the n times table, starting with 0
  * @n: number of the times table
  */
 
 void print_times_table(int n)
 {
-	int i, j, k;
+	int num1, num2, num3;
 
 	if (n >= 0 && n <= 15)
 	{
-		for (i = 0; i <= n; i++)
+		for (num1 = 0; num1 <= n; num1++)
 		{
-			for (j = 0; j <= n; j++)
+			for (num2 = 0; num2 <= n; num2++)
 			{
-				k = j * i;
-				if (j == 0)
+				num3 = num2 * num1;
+				if (num2 == 0)
 				{
-					_putchar(k + '0');
-				} else if (k < 10 && j != 0)
-				{
-					_putchar(',');
-					_putchar(' ');
-					_putchar(' ');
-					_putchar(' ');
-					_putchar(k + '0');
-				} else if (k >= 10 && k < 100)
+					_putchar(num3 + '0');
+				} else if (num3 < 10 && num2 != 0)
 				{
 					_putchar(',');
 					_putchar(' ');
 					_putchar(' ');
-					_putchar((k / 10) + '0');
-					_putchar((k % 10) + '0');
-				} else if (k >= 100)
+					_putchar(' ');
+					_putchar(num3 + '0');
+				} else if (num3 >= 10 && num3 < 100)
 				{
 					_putchar(',');
 					_putchar(' ');
-					_putchar((k / 100) + '0');
-					_putchar(((k / 10) % 10) + '0');
-					_putchar((k % 10) + '0');
+					_putchar(' ');
+					_putchar((num3 / 10) + '0');
+					_putchar((num3 % 10) + '0');
+				} else if (num3 >= 100)
+				{
+					_putchar(',');
+					_putchar(' ');
+					_putchar((num3 / 100) + '0');
+					_putchar(((num3 / 10) % 10) + '0');
+					_putchar((num3 % 10) + '0');
 				}
 			}
 			_putchar('\n');
