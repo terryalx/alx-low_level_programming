@@ -38,7 +38,7 @@ int main(void)
 		}
 		else
 		{
-			putchar('\num');
+			putchar('\n');
 		}
 	}
 
