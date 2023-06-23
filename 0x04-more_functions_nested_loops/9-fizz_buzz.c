@@ -31,7 +31,6 @@ int main(void)
 			printf("%d", num);
 		}
 
-
 		if (num != 100)
 		{
 			putchar(' ');
