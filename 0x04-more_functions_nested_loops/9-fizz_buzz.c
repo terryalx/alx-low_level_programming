@@ -4,8 +4,8 @@
  * main - program prints 1 - 100
  * print Fizz for multiples of three
  * print Buzz for multiples of five
- * print FizzBuzz for multiples of both three and five 
- * Return: 0 (success)
+ * print FizzBuzz for multiples of both three and five
+ * Return: 0
  */
 
 int main(void)
