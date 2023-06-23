@@ -7,14 +7,13 @@
 
 int main(void)
 {
-	long prime = 612852475143, num, div;
-	div = 2;
+	long prime = 612852475143, num;
 
-	while (num < (prime / div))
+	while (num < (prime / 2))
 	{
-		if ((prime % div) == 0)
+		if ((prime % 2) == 0)
 		{
-			prime /= div;
+			prime /= 2;
 			continue;
 		}
 
@@ -24,8 +23,6 @@ int main(void)
 				prime /= num;
 		}
 	}
-
 	printf("%ld\n", prime);
-
 	return (0);
 }
