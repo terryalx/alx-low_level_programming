@@ -2,29 +2,27 @@
 
 /**
  * rot13 - encrypts code
- * @s: string to encrypt
- * Return: char value
+ * @s: encrypt string
+ * Return: s
  */
 
 char *rot13(char *s)
 {
-	int a;
-	int b;
+	int numa;
+	int numb;
+	char en1[] = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ";
+	char en2[] = "nNoOpPqQrRsStTuUvVwWxXyYzZaAbBcCdDeEfFgGhHiIjJkKlLmM";
 
-	char encode1[] = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ";
-	char encode2[] = "nNoOpPqQrRsStTuUvVwWxXyYzZaAbBcCdDeEfFgGhHiIjJkKlLmM";
-
-	for (a = 0; s[a] != '\0'; a++)
+	for (numa = 0; s[numa] != '\0'; numa++)
 	{
-		for (b = 0; encode1[b]; b++)
+		for (numb = 0; en1[numb]; numb++)
 		{
-			if (s[a] == encode1[b])
+			if (s[numa] == en1[numb])
 			{
-				s[a] = encode2[b];
+				s[numa] = en2[numb];
 				break;
 			}
 		}
 	}
-	
 	return (s);
 }
