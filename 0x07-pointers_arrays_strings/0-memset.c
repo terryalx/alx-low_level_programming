@@ -1,20 +1,21 @@
 #include "main.h"
 
 /**
- * _memcpy - copies from source to dest values in array
- * @dest: destination to copy into
- * @src: source to copy from
- * @n: n times
- * Return: return the string value (dest)
+ * _memset -  a function that fills memory with a constant byte.
+ * @s: char
+ * @b: the byte
+ * @n: the first n bytes to be filled
+ * Return: a pointer to the memory area s
  */
 
-char *_memcpy(char *dest, char *src, unsigned int n)
+char *_memset(char *s, char b, unsigned int n)
 {
 	unsigned int i;
 
 	for (i = 0; i < n; i++)
 	{
-		dest[i] = src[i];
+		s[i] = b;
 	}
-	return (dest);
+
+	return (s);
 }
