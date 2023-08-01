@@ -10,12 +10,12 @@
 int pop_listint(listint_t **head)
 {
 	listint_t *new_node;
-	int i;
+	int n;
 
 	if (*head == NULL)
 		return (0);
 
-	i = (*head)->i;
+	n = (*head)->n;
 
 	new_node = (*head)->next;
 
@@ -23,5 +23,5 @@ int pop_listint(listint_t **head)
 
 	*head = new_node;
 
-	return (i);
+	return (n);
 }
