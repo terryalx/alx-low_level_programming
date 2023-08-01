@@ -1,12 +1,12 @@
 #include "lists.h"
 
 /**
-  * add_nodeint_end - add new node to end
-  * @head: a pointer
-  * @n: new node value -> int
-  *
-  * Return: new element or NULL on fail
-  */
+ * add_nodeint_end - add new node to end
+ * @head: a pointer
+ * @n: new node value -> int
+ *
+ * Return: new element or NULL on fail
+ */
 
 listint_t *add_nodeint_end(listint_t **head, const int n)
 {
@@ -32,7 +32,7 @@ listint_t *add_nodeint_end(listint_t **head, const int n)
 			tmp = tmp->next;
 		tmp->next = new_node;
 	}
-	
+
 	return (new_node);
 }
 
