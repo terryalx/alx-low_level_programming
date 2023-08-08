@@ -2,9 +2,9 @@
 
 /**
  * main - copy one file to another file
- * @argc: arguments
+ * @argc: argument
  * @argv: argument
- * Return: 0
+ * Return: 0.
  */
 
 int main(int argc, char *argv[])
