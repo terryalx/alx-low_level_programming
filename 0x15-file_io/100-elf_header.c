@@ -4,104 +4,144 @@
 #include <unistd.h>
 #include <elf.h>
 
-void print_error(const char *msg) {
-	fprintf(stderr, "%s\n", msg);
-	exit(98);
+/**
+ * print_error - Print error messages to stderr and exit with status code 98
+ * @msg: The error message to be displayed
+ *
+ * This function is responsible for displaying error messages to stderr and
+ * then exiting the program with a status code of 98 to indicate an error.
+ */
+void print_error(const char *msg)
+{
+    fprintf(stderr, "%s\n", msg);
+    exit(98);
 }
 
-void print_elf_header(Elf64_Ehdr *header) {
-	printf("ELF Header:\n");
-	printf("  Magic:   ");
-	for (int i = 0; i < EI_NIDENT; i++)
-		printf("%02x ", header->e_ident[i]);
-	printf("\n");
-	printf("  Class:                             ");
-	switch (header->e_ident[EI_CLASS]) {
-		case ELFCLASS32:
-			printf("ELF32\n");
-			break;
-		case ELFCLASS64:
-			printf("ELF64\n");
-			break;
-		default:
-			printf("<unknown>\n");
-			break;
-	}
-	printf("  Data:                              ");
-	switch (header->e_ident[EI_DATA]) {
-		case ELFDATA2LSB:
-			printf("2's complement, little endian\n");
-			break;
-		case ELFDATA2MSB:
-			printf("2's complement, big endian\n");
-			break;
-		default:
-			printf("<unknown>\n");
-			break;
-	}
-	printf("  Version:                           %d (current)\n", header->e_ident[EI_VERSION]);
-	printf("  OS/ABI:                            ");
-	switch (header->e_ident[EI_OSABI]) {
-		case ELFOSABI_SYSV:
-			printf("UNIX - System V\n");
-			break;
-		case ELFOSABI_NETBSD:
-			printf("UNIX - NetBSD\n");
-			break;
-		case ELFOSABI_SOLARIS:
-			printf("UNIX - Solaris\n");
-			break;
-		default:
-			printf("<unknown: %02x>\n", header->e_ident[EI_OSABI]);
-			break;
-	}
-	printf("  ABI Version:                       %d\n", header->e_ident[EI_ABIVERSION]);
-	printf("  Type:                              ");
-	switch (header->e_type) {
-		case ET_NONE:
-			printf("NONE (Unknown type)\n");
-			break;
-		case ET_REL:
-			printf("REL (Relocatable file)\n");
-			break;
-		case ET_EXEC:
-			printf("EXEC (Executable file)\n");
-			break;
-		case ET_DYN:
-			printf("DYN (Shared object file)\n");
-			break;
-		default:
-			printf("<unknown>\n");
-			break;
-	}
-	printf("  Entry point address:               0x%lx\n", header->e_entry);
+/**
+ * print_elf_header - Print the information contained in the ELF header
+ * @header: A pointer to the ELF header structure
+ *
+ * This function takes a pointer to an ELF header structure and prints the
+ * relevant information from the header in a human-readable format, similar to
+ * the output of the `readelf -h` command.
+ */
+void print_elf_header(Elf64_Ehdr *header)
+{
+    printf("ELF Header:\n");
+    
+    printf("  Magic:   ");
+    for (int i = 0; i < EI_NIDENT; i++)
+        printf("%02x ", header->e_ident[i]);
+    printf("\n");
+    
+    printf("  Class:                             ");
+    switch (header->e_ident[EI_CLASS]) {
+        case ELFCLASS32:
+            printf("ELF32\n");
+            break;
+        case ELFCLASS64:
+            printf("ELF64\n");
+            break;
+        default:
+            printf("<unknown>\n");
+            break;
+    }
+    
+    printf("  Data:                              ");
+    switch (header->e_ident[EI_DATA]) {
+        case ELFDATA2LSB:
+            printf("2's complement, little endian\n");
+            break;
+        case ELFDATA2MSB:
+            printf("2's complement, big endian\n");
+            break;
+        default:
+            printf("<unknown>\n");
+            break;
+    }
+    
+    printf("  Version:                           %d (current)\n", header->e_ident[EI_VERSION]);
+    
+    printf("  OS/ABI:                            ");
+    switch (header->e_ident[EI_OSABI]) {
+        case ELFOSABI_SYSV:
+            printf("UNIX - System V\n");
+            break;
+        case ELFOSABI_NETBSD:
+            printf("UNIX - NetBSD\n");
+            break;
+        case ELFOSABI_SOLARIS:
+            printf("UNIX - Solaris\n");
+            break;
+        default:
+            printf("<unknown: %02x>\n", header->e_ident[EI_OSABI]);
+            break;
+    }
+    
+    printf("  ABI Version:                       %d\n", header->e_ident[EI_ABIVERSION]);
+    
+    printf("  Type:                              ");
+    switch (header->e_type) {
+        case ET_NONE:
+            printf("NONE (Unknown type)\n");
+            break;
+        case ET_REL:
+            printf("REL (Relocatable file)\n");
+            break;
+        case ET_EXEC:
+            printf("EXEC (Executable file)\n");
+            break;
+        case ET_DYN:
+            printf("DYN (Shared object file)\n");
+            break;
+        default:
+            printf("<unknown>\n");
+            break;
+    }
+    
+    printf("  Entry point address:               0x%lx\n", header->e_entry);
 }
 
-int main(int argc, char *argv[]) {
-	if (argc != 2) {
-		print_error("Usage: elf_header elf_filename");
-	}
+/**
+ * main - Entry point of the program
+ * @argc: The number of command-line arguments
+ * @argv: An array of strings containing the command-line arguments
+ *
+ * This is the entry point of the program. It takes the ELF filename as a
+ * command-line argument, reads the ELF header from the file, and then prints
+ * the information contained in the ELF header using the print_elf_header
+ * function.
+ *
+ * Return: 0 on success, 98 on failure (e.g., incorrect number of arguments,
+ * file opening error, not an ELF file, etc.)
+ */
+int main(int argc, char *argv[])
+{
+    if (argc != 2) {
+        print_error("Usage: elf_header elf_filename");
+    }
 
-	const char *filename = argv[1];
-	int fd = open(filename, O_RDONLY);
-	if (fd == -1) {
-		print_error("Error opening the file.");
-	}
+    const char *filename = argv[1];
+    int fd = open(filename, O_RDONLY);
+    if (fd == -1) {
+        print_error("Error opening the file.");
+    }
 
-	Elf64_Ehdr header;
-	if (read(fd, &header, sizeof(header)) != sizeof(header)) {
-		print_error("Error reading the ELF header.");
-	}
+    Elf64_Ehdr header;
+    if (read(fd, &header, sizeof(header)) != sizeof(header)) {
+        print_error("Error reading the ELF header.");
+    }
 
-	if (header.e_ident[EI_MAG0] != ELFMAG0 ||
-			header.e_ident[EI_MAG1] != ELFMAG1 ||
-			header.e_ident[EI_MAG2] != ELFMAG2 ||
-			header.e_ident[EI_MAG3] != ELFMAG3) {
-		print_error("Not an ELF file.");
-	}
+    if (header.e_ident[EI_MAG0] != ELFMAG0 ||
+        header.e_ident[EI_MAG1] != ELFMAG1 ||
+        header.e_ident[EI_MAG2] != ELFMAG2 ||
+        header.e_ident[EI_MAG3] != ELFMAG3) {
+        print_error("Not an ELF file.");
+    }
 
-	print_elf_header(&header);
+    print_elf_header(&header);
 
-	close(fd);
-	return 0;
+    close(fd);
+    return 0;
 }
+
