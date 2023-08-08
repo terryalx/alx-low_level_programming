@@ -2,18 +2,15 @@
 #define BUF_SIZE 1024
 
 /**
- * main - main
- * @argc: arguments
- * @argv: pointer
- * Return: 0
- **/
+* main - main
+* @argc: number of arguments
+* @argv: a pointer point to the array of arguments
+* Return: Always 0
+**/
 
 int main(int argc, char **argv)
 {
-	int f0;
-	int f1;
-	int res0;
-	int res1;
+	int f0, f1, res0, res1;
 	char *buffer;
 
 	if (argc != 3)
@@ -23,9 +20,7 @@ int main(int argc, char **argv)
 	}
 	buffer = malloc(sizeof(char) * BUF_SIZE);
 	if (!buffer)
-	{
 		return (0);
-	}
 
 	f1 = open(argv[1], O_RDONLY);
 	error_98(f1, buffer, argv[1]);
@@ -34,9 +29,7 @@ int main(int argc, char **argv)
 	do {
 		res0 = read(f1, buffer, BUF_SIZE);
 		if (res0 == 0)
-		{
 			break;
-		}
 		error_98(res0, buffer, argv[1]);
 		res1 = write(f0, buffer, res0);
 		error_99(res1, buffer, argv[2]);
@@ -50,11 +43,11 @@ int main(int argc, char **argv)
 }
 
 /**
- * error_98 - checks error 98
- * @f0:  value
- * @buffer: buffer
- * @argv: argument
- **/
+* error_98 - checks error 98
+* @f0: the value to check
+* @buffer: the buffer
+* @argv: argument
+**/
 void error_98(int f0, char *buffer, char *argv)
 {
 
@@ -67,11 +60,11 @@ void error_98(int f0, char *buffer, char *argv)
 }
 
 /**
- * error_99 - checks error 99
- * @f0: value
- * @buffer: buffer
- * @argv: argument
- */
+* error_99 - checks error 99
+* @f0: value to check
+* @buffer: the buffer
+* @argv: argument
+*/
 void error_99(int f0, char *buffer, char *argv)
 {
 	if (f0 < 0)
@@ -81,12 +74,11 @@ void error_99(int f0, char *buffer, char *argv)
 		exit(99);
 	}
 }
-
 /**
- * error_100 - checks error 100
- * @f0: value
- * @buffer: buffer
- */
+* error_100 - checks error 100
+* @f0: the value to check
+* @buffer: the buffer
+*/
 void error_100(int f0, char *buffer)
 {
 	if (f0 < 0)
