@@ -34,7 +34,7 @@ int append_text_to_file(const char *filename, char *text_content)
 			i++;
 		}
 
-		app = write(file, text_content, i);
+		append = write(file, text_content, i);
 
 		if (append < 0)
 		{
