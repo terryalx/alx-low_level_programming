@@ -9,9 +9,7 @@
 
 int main(int argc, char *argv[])
 {
-	int file1;
-	int file2;
-	int size;
+	int file1, file2, size;
 	char buf[1024];
 
 	if (argc != 3)
