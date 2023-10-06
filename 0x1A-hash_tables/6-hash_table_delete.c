@@ -1,8 +1,8 @@
 #include "hash_tables.h"
 
 /**
- * free_list - frees a linked list
- * @head: hash_node_t list to be freed
+ * free_list - Frees a linked list.
+ * @head: Pointer to the hash_node_t list to be freed.
  */
 void free_list(hash_node_t *head)
 {
@@ -19,18 +19,24 @@ void free_list(hash_node_t *head)
 }
 
 /**
- * hash_table_delete - deletes a hash table
- * @ht: hash table to be deleted
+ * hash_table_delete - Deletes a hash table.
+ * @ht: Pointer to the hash table to be deleted.
  */
 void hash_table_delete(hash_table_t *ht)
 {
-	unsigned long int i;
+	unsigned long int vall;
 
 	if (!ht)
+	{
 		return;
+	}
 
-	for (i = 0; i < ht->size; i++)
-		free_list(ht->array[i]);
+	for (vall = 0; vall < ht->size; vall++)
+	{
+		free_list(ht->array[vall]);
+	}
+
 	free(ht->array);
 	free(ht);
 }
+
