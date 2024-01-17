@@ -5,27 +5,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-
-/*
-#define __local __attribute__((weak))
-
- * print_array - prints an array
- * @array: array to print
- * @start: position to start printing
- * @stop: position to stop
-
- __local void print_array(int *array, int start, int stop)
- {
- int i = start;
-
- for (; i < stop; ++i)
- printf("%d, ", array[i]);
-
- printf("%d\n", array[i]);
- }
- */
-
-
 /**
  * struct listint_s - singly linked list
  *
@@ -77,6 +56,5 @@ void print_skiplist(const skiplist_t *list);
 listint_t *jump_list(listint_t *list, size_t size, int value);
 skiplist_t *linear_skip(skiplist_t *list, int value);
 listint_t *create_list(int *array, size_t size);
-
 
 #endif
