@@ -12,7 +12,8 @@
  */
 int recursive_search(int *array, size_t size, int value)
 {
-	size_t half = size / 2;
+	int div = 2
+	size_t half = size / div;
 	size_t i;
 
 	/* Check for NULL array or empty size */
@@ -26,7 +27,7 @@ int recursive_search(int *array, size_t size, int value)
 
 	printf("\n");
 
-	if (half && size % 2 == 0)
+	if (half && size % div == 0)
 		half--;
 
 	if (value == array[half])
@@ -51,14 +52,14 @@ int recursive_search(int *array, size_t size, int value)
  */
 int binary_search(int *array, size_t size, int value)
 {
-	int index;
+	int index_value;
 
 	/* Call recursive_search to get the index */
-	index = recursive_search(array, size, value);
+	index_value = recursive_search(array, size, value);
 
 	/* Check if the index is valid and if the value is found at that index */
-	if (index >= 0 && array[index] != value)
+	if (index_value >= 0 && array[index_value] != value)
 		return (-1);
 
-	return (index);
+	return (index_value);
 }
